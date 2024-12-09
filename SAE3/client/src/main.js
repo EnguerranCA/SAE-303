@@ -22,9 +22,9 @@ V.init = function(){
     V.renderHeader();
 }
 
-V.renderHeader= function(){
+V.renderHeader= async function(){
     V.header.innerHTML = HeaderView.render();
-    V.data.innerHTML = StatusView.render();
+    V.data.innerHTML = await StatusView.render();
 }
 
 
