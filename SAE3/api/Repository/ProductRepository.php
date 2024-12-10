@@ -54,6 +54,22 @@ class ProductRepository extends EntityRepository {
         return $result;
     }
 
+    public function returnMonthlySales($duration){
+        $requete = $this->cnx->prepare("
+            SELECT DATE_FORMAT(o.order_date, '%Y-%m') as month, SUM(oi.quantity) as total_quantity
+            FROM Orders o
+            JOIN OrderItems oi ON o.id = oi.order_id
+            WHERE o.order_date >= DATE_SUB(CURDATE(), INTERVAL (:duration - 1) MONTH)
+            AND o.order_date <= CURDATE()
+            GROUP BY month
+            ORDER BY month
+        ");
+        $requete->bindParam(':duration', $duration, PDO::PARAM_INT);
+        $requete->execute();
+        $result = $requete->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
 
     public function delete($id){
         // Not implemented ! TODO when needed !
