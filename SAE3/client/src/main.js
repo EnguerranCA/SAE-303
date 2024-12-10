@@ -10,10 +10,12 @@ import { MonthlySalesCategoryView } from "./ui/monthly_sales_category/index.js";
 import { MonthlySalesProductView } from "./ui/monthly_sales_product/index.js";
 import { SmallestStocksView } from "./ui/smallest_stocks/index.js";
 import { MonthlySalesView } from "./ui/monthly_sales/index.js";
+import { CustomerOrderCategoryView } from "./ui/customer_purchase/index.js";    // à finir
 
 
 // import des data
 import { ProductData } from "./data/product.js";
+import { CustomerData } from "./data/customer.js";
 
 
 // import des méthodes 
@@ -26,6 +28,9 @@ C.init = async function(){
     
     let productSelect = document.querySelector("#product-select");
     productSelect.addEventListener("change", C.handler_changeSelectProduct);
+
+    let customerSelect = document.querySelector("#customer-select");
+    customerSelect.addEventListener("change", C.handler_changeSelectCustomer);
 }
 
 let V = {
@@ -45,6 +50,7 @@ V.init = async function(){
     V.data.innerHTML += await MonthlySalesCategoryView.render();
     V.data.innerHTML += await SmallestStocksView.render();
     V.data.innerHTML += await MonthlySalesProductView.render(await ProductData.fetchNames());
+    V.data.innerHTML += await CustomerOrderCategoryView.render(await CustomerData.fetchNames());
 
 
     // affichage des graphiques
@@ -53,6 +59,7 @@ V.init = async function(){
     MonthlySalesCategoryView.renderChart(await ProductData.fetchSalesCategory("6"));
     MonthlySalesProductView.renderChart(await ProductData.fetchSalesProduct(1, "12"));
     SmallestStocksView.renderChart(await ProductData.fetchSmallestStocks(10));
+    CustomerOrderCategoryView.renderChart(await CustomerData.fetchOrdersCategory(1));
 }
 
 V.renderHeader= async function(){
@@ -65,6 +72,12 @@ V.renderHeader= async function(){
 C.handler_changeSelectProduct = async function(){
     let product_id = document.querySelector("#product-select").value;
     MonthlySalesProductView.renderChart(await ProductData.fetchSalesProduct(product_id, "12"));
+}
+
+// Changement de client dans le select
+C.handler_changeSelectCustomer = async function(){
+    let customer_id = document.querySelector("#customer-select").value;
+    CustomerOrderCategoryView.renderChart(await CustomerData.fetchOrdersCategory(customer_id));
 }
 
 C.init();
