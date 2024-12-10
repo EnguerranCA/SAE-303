@@ -6,7 +6,10 @@
 import { HeaderView } from "./ui/header/index.js";
 import { StatusView } from "./ui/status/index.js";
 import { TopProductsView } from "./ui/top_products/index.js";
+import { MonthlySalesCategoryView } from "./ui/monthly_sales_category/index.js";
+
 import { MonthlySalesView } from "./ui/monthly_sales/index.js";
+
 
 // import des data
 import { ProductData } from "./data/product.js";
@@ -39,10 +42,13 @@ V.renderHeader= async function(){
     // rendu des zones pour les graphiques
     V.data.innerHTML += await TopProductsView.render();
     V.data.innerHTML += await MonthlySalesView.render();
+    V.data.innerHTML += await MonthlySalesCategoryView.render();
+
 
     // affichage des graphiques
     MonthlySalesView.renderChart(await ProductData.fetchSales("6"));
     TopProductsView.renderChart(await ProductData.fetchTop(3, "2"));
+    MonthlySalesCategoryView.renderChart(await ProductData.fetchSalesCategory("6"));
 }
 
 C.init();

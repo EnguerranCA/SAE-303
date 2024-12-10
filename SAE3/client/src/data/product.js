@@ -14,5 +14,9 @@ ProductData.fetchSales = async function(duration){
     return data;
 }
 
+ProductData.fetchSalesCategory = async function(duration){
+    let data = await getRequest('product/sales' + "?duration=" + duration + "&category=true");
+    return data;
+}
 
 export {ProductData};

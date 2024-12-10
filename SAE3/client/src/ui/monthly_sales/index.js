@@ -5,7 +5,6 @@ const template = await templateFile.text();
 let MonthlySalesView = {};
 
 MonthlySalesView.renderChart = async function(data){
-    console.log(data);
 
     let monthName = [];
     let monthSales = [];
