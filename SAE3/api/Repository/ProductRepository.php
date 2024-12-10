@@ -38,7 +38,7 @@ class ProductRepository extends EntityRepository {
 
     public function returnTopProducts($amount, $duration){
         $requete = $this->cnx->prepare("
-            SELECT p.*, SUM(oi.quantity) as total_quantity
+            SELECT p.product_name, SUM(oi.quantity) as total_quantity
             FROM Products p
             JOIN OrderItems oi ON p.id = oi.product_id
             JOIN Orders o ON oi.order_id = o.id

@@ -1,3 +1,7 @@
+// import de highcharts
+// var Highcharts = require('../node_modules/highcharts/highcharts.js');
+
+
 // import des composants
 import { HeaderView } from "./ui/header/index.js";
 import { StatusView } from "./ui/status/index.js";
@@ -10,8 +14,6 @@ import { ProductData } from "./data/product.js";
 
 // import des méthodes 
 import {getRequest, postRequest, deleteRequest } from "./lib/api-request.js";
-
-
 
 let C = {};
 
@@ -34,11 +36,13 @@ V.renderHeader= async function(){
     V.header.innerHTML = HeaderView.render();
     V.data.innerHTML = await StatusView.render();
     
+    // rendu des zones pour les graphiques
     V.data.innerHTML += await TopProductsView.render();
-    TopProductsView.renderChart(await ProductData.fetchTop(3, "2"));
-
     V.data.innerHTML += await MonthlySalesView.render();
+
+    // affichage des graphiques
     MonthlySalesView.renderChart(await ProductData.fetchSales("6"));
+    TopProductsView.renderChart(await ProductData.fetchTop(3, "2"));
 }
 
 C.init();

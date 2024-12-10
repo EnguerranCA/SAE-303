@@ -42,8 +42,8 @@ body {
 
 .liste-cellules {
   display: grid;
-  grid-template-columns: repeat(4, minmax(200px, 1fr));
-  grid-auto-flow: dense;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-auto-flow: row;
   gap: 1rem;
 }
 

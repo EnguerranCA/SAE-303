@@ -11,8 +11,10 @@ TopProductsView.renderChart = async function(data){
     let productValues = [];
     for (let product of data){
         productNames.push(product.product_name);
-        productValues.push(product.quantity);
+        productValues.push(parseFloat(product.total_quantity) || 0);
     }
+    console.log(productNames);
+    console.log(productValues);
     Highcharts.chart('top-products', {
         chart: {
             type: 'bar'
