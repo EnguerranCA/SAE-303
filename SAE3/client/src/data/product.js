@@ -9,4 +9,10 @@ ProductData.fetchTop = async function(amount, duration){
     return data;
 }
 
+ProductData.fetchSales = async function(duration){
+    let data = await getRequest('product/sales' + "?duration=" + duration);
+    return data;
+}
+
+
 export {ProductData};

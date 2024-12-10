@@ -7,21 +7,22 @@ let MonthlySalesView = {};
 MonthlySalesView.renderChart = async function(data){
     console.log(data);
 
-    let productNames = [];
-    let productValues = [];
-    for (let product of data){
-        productNames.push(product.product_name);
-        productValues.push(product.quantity);
+    let monthName = [];
+    let monthSales = [];
+    for (let loopedMonth of data){
+        monthName.push(loopedMonth.month);
+        monthSales.push(parseFloat(loopedMonth.total_quantity) || 0);
     }
+
     Highcharts.chart('monthly-sales', {
         chart: {
-            type: 'bar'
+            type: 'column'
         },
         title: {
             text: 'Ventes mensuelles'
         },
         xAxis: {
-            categories: productNames
+            categories: monthName
         },
         yAxis: {
             title: {
@@ -29,8 +30,8 @@ MonthlySalesView.renderChart = async function(data){
             }
         },
         series: [{
-            name: 'Quantité vendue',
-            data: productValues
+            name: 'Revenu mensuel',
+            data: monthSales
         }]
     });
 }
@@ -38,7 +39,7 @@ MonthlySalesView.renderChart = async function(data){
 MonthlySalesView.render = async function(){
     // let data = await getRequest("products/top"); 
     let topChart = template;
-    document.getElementById('data').innerHTML = topChart;
+    document.getElementById('data').innerHTML += topChart;
 
     
     return topChart;
