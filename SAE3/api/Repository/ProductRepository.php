@@ -61,9 +61,10 @@ class ProductRepository extends EntityRepository
     public function returnMonthlySales($duration)
     {
         $requete = $this->cnx->prepare("
-            SELECT DATE_FORMAT(o.order_date, '%Y-%m') as month, SUM(oi.quantity) as total_quantity
+            SELECT DATE_FORMAT(o.order_date, '%Y-%m') as month, SUM(oi.quantity * p.price) as total_sales
             FROM Orders o
             JOIN OrderItems oi ON o.id = oi.order_id
+            JOIN Products p ON oi.product_id = p.id
             WHERE o.order_date >= DATE_SUB(CURDATE(), INTERVAL (:duration - 1) MONTH)
             AND o.order_date <= CURDATE()
             GROUP BY month
@@ -78,7 +79,7 @@ class ProductRepository extends EntityRepository
     public function returnMonthlySalesCategory($duration)
     {
         $requete = $this->cnx->prepare("
-            SELECT DATE_FORMAT(o.order_date, '%Y-%m') as month, p.category as category_name, SUM(oi.quantity) as total_quantity
+            SELECT DATE_FORMAT(o.order_date, '%Y-%m') as month, p.category as category_name, SUM(oi.quantity * p.price) as total_sales
             FROM Orders o
             JOIN OrderItems oi ON o.id = oi.order_id
             JOIN Products p ON oi.product_id = p.id

@@ -10,22 +10,22 @@ MonthlySalesView.renderChart = async function(data){
     let monthSales = [];
     for (let loopedMonth of data){
         monthName.push(loopedMonth.month);
-        monthSales.push(parseFloat(loopedMonth.total_quantity) || 0);
+        monthSales.push(parseFloat(loopedMonth.total_sales) || 0);
     }
 
     Highcharts.chart('monthly-sales', {
         chart: {
-            type: 'column'
+            type: 'line'
         },
         title: {
-            text: 'Ventes mensuelles'
+            text: 'Revenus mensuels'
         },
         xAxis: {
             categories: monthName
         },
         yAxis: {
             title: {
-                text: ''
+                text: 'Revenu en €'
             }
         },
         series: [{

@@ -16,7 +16,7 @@ MonthlySalesCategoryView.renderChart = async function (data) {
   for (let loopedCategory of data) {
     let loopedSales = [];
     for (let loopedMonth of loopedCategory) {
-      loopedSales.push(parseFloat(loopedMonth.total_quantity) || 0);
+      loopedSales.push(parseFloat(loopedMonth.total_sales) || 0);
     }
 
     let newCategory = {
@@ -40,14 +40,14 @@ MonthlySalesCategoryView.renderChart = async function (data) {
       type: "spline",
     },
     title: {
-      text: "Ventes mensuelles par catégories",
+      text: "Revenu mensuel par catégories",
     },
     xAxis: {
       categories: monthName,
     },
     yAxis: {
       title: {
-        text: "Nombre de ventes",
+        text: "Revenu en €",
       },
     },
     series: categories,
