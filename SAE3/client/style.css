@@ -4,7 +4,7 @@ body {
   font-family: "Roboto", sans-serif;
   background: #EEF0F4;
   margin: 0;
-  padding: 5rem;
+  padding: 0 5rem;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -23,6 +23,35 @@ body {
   flex-direction: column;
 
   padding: 1.5rem;
+}
+
+.cellule--split {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.cellule__graph {
+  background: #eef0f4;
+  border-radius: 2rem;
+  box-shadow: inset 9.91px 9.91px 15px #d9dade,
+    inset -9.91px -9.91px 15px #ffffff;
+
+    
+  padding: 1.5rem;
+}
+
+.cellule__select {
+  background: #eef0f4;
+  border-radius: 2rem;
+  box-shadow: inset 9.91px 9.91px 15px #d9dade,
+    inset -9.91px -9.91px 15px #ffffff;
+
+  padding: 1.5rem;
+  border: none;
+
+  font-size: 1rem;
 }
 
 .cellule__content {

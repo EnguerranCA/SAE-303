@@ -4,14 +4,8 @@ const template = await templateFile.text();
 let MonthlySalesCategoryView = {};
 
 MonthlySalesCategoryView.renderChart = async function (data) {
-  console.log(data);
 
   let categories = [];
-  // let category = {
-  //     name: "Category",
-  //     data: []
-  // }
-
   //   On récupère les données de chaque catégorie
   for (let loopedCategory of data) {
     let loopedSales = [];
@@ -33,7 +27,6 @@ MonthlySalesCategoryView.renderChart = async function (data) {
     monthName.push(loopedMonth.month);
   }
 
-  console.log(categories);
 
   Highcharts.chart("monthly-sales-category", {
     chart: {

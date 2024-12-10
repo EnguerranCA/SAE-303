@@ -114,7 +114,7 @@ class ProductRepository extends EntityRepository
     }
 
     // Itération 7 : Retourner les produits avec le plus petit stock
-    
+
     public function returnSmallestStocks($amount)
     {
         $requete = $this->cnx->prepare("
@@ -129,7 +129,35 @@ class ProductRepository extends EntityRepository
         return $result;
     }
 
+    // Itération 8 : Pour un produit sélectionné, visualiser l’évolution de ses ventes sur les 12 derniers mois
 
+    public function returnProductSales($product_id, $duration) {
+        $requete = $this->cnx->prepare("
+        SELECT DATE_FORMAT(o.order_date, '%Y-%m') as month, SUM(oi.quantity) as total_sales
+        FROM Orders o
+        JOIN OrderItems oi ON o.id = oi.order_id
+        WHERE oi.product_id = :product_id
+        AND o.order_date >= DATE_SUB(CURDATE(), INTERVAL (:duration -1) MONTH)
+        AND o.order_date <= CURDATE()
+        GROUP BY month
+        ORDER BY month
+        ");
+        $requete->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $requete->bindParam(':duration', $duration, PDO::PARAM_INT);
+        $requete->execute();
+        $result = $requete->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    // Itération 8 : récupérer le nom et l'id de tous les produits
+    public function findAll()
+    {
+        $requete = $this->cnx->prepare("select id, product_name from Products");
+        $requete->execute();
+        $result = $requete->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+    
     public function delete($id)
     {
         // Not implemented ! TODO when needed !
@@ -148,9 +176,4 @@ class ProductRepository extends EntityRepository
         return false;
     }
 
-    public function findAll()
-    {
-        // Not implemented ! TODO when needed !
-        return false;
-    }
 }

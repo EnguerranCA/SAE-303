@@ -5,7 +5,6 @@ const template = await templateFile.text();
 let TopProductsView = {};
 
 TopProductsView.renderChart = async function(data){
-    console.log(data);
 
     let productNames = [];
     let productValues = [];

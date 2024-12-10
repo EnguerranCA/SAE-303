@@ -6,8 +6,9 @@ const template = await templateFile.text();
 
 let StatusView = {};
 
-StatusView.render = async function(){
+StatusView.render = async function() {
     let data = await getRequest("order/status");
+    let v = document.createElement("div");
     let cells = '';
 
     for (const [title, number] of Object.entries(data)) {
@@ -15,7 +16,11 @@ StatusView.render = async function(){
         cells += cell;
     }
 
-    return cells;
+    v.innerHTML = cells;
+    v.classList.add('cellule--split');
+
+    console.log(v.outerHTML);
+    return v.outerHTML;
 }
 
 export {StatusView};
