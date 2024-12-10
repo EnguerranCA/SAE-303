@@ -14,6 +14,7 @@ class Product implements JsonSerializable {
     private int $product_id; // id du produit
     private int $quantity; // quantité du produit
     private string $status; // statut de la commande
+    private int $stock; // stock du produit
 
     public function __construct(int $id){
         $this->id = $id;
@@ -101,5 +102,27 @@ class Product implements JsonSerializable {
         $this->status = $status;
         return $this;
     }
+
+    /**
+     * Get the value of stock
+     */
+    public function getStock(): int
+    {
+        return $this->stock;
+    }
+
+    /**
+     * Set the value of stock
+     *
+     * @return  self
+     */
+    public function setStock(int $stock): self
+    {
+        $this->stock = $stock;
+        return $this;
+    }
+
+    
+
     
 }

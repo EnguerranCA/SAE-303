@@ -19,4 +19,9 @@ ProductData.fetchSalesCategory = async function(duration){
     return data;
 }
 
+ProductData.fetchSmallestStocks = async function(amount){
+    let data = await getRequest('product/stock' + "?amount=" + amount);
+    return data;
+}
+
 export {ProductData};

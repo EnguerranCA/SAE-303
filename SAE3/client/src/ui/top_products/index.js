@@ -13,8 +13,6 @@ TopProductsView.renderChart = async function(data){
         productNames.push(product.product_name);
         productValues.push(parseFloat(product.total_quantity) || 0);
     }
-    console.log(productNames);
-    console.log(productValues);
     Highcharts.chart('top-products', {
         chart: {
             type: 'bar'

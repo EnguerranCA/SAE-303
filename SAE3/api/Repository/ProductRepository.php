@@ -39,6 +39,7 @@ class ProductRepository extends EntityRepository
         return $p;
     }
 
+    // Itération 4 : Retourner les produits les plus vendus
     public function returnTopProducts($amount, $duration)
     {
         $requete = $this->cnx->prepare("
@@ -58,6 +59,7 @@ class ProductRepository extends EntityRepository
         return $result;
     }
 
+    // Itération 5 : Retourner les revenus par mois
     public function returnMonthlySales($duration)
     {
         $requete = $this->cnx->prepare("
@@ -75,6 +77,9 @@ class ProductRepository extends EntityRepository
         $result = $requete->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
+
+
+    // Itération 6 : Visualiser le montant mensuel des ventes par catégorie 
 
     public function returnMonthlySalesCategory($duration)
     {
@@ -106,6 +111,22 @@ class ProductRepository extends EntityRepository
         $groupedResult = array_values($groupedResult);
 
         return $groupedResult;
+    }
+
+    // Itération 7 : Retourner les produits avec le plus petit stock
+    
+    public function returnSmallestStocks($amount)
+    {
+        $requete = $this->cnx->prepare("
+            SELECT p.product_name, p.stock
+            FROM Products p
+            ORDER BY p.stock ASC
+            LIMIT :amount
+        ");
+        $requete->bindParam(':amount', $amount, PDO::PARAM_INT);
+        $requete->execute();
+        $result = $requete->fetchAll(PDO::FETCH_OBJ);
+        return $result;
     }
 
 

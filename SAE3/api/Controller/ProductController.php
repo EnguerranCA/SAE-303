@@ -36,6 +36,14 @@ class ProductController extends Controller
             // URI is .../product/sales
             $p = $this->Products->returnMonthlySales($duration);
             return $p;
+        } else if ($id == "stock") {
+            // URI is .../product/stock
+            $p = $this->Products->returnSmallestStocks($amount);
+            return $p;
+        } else {
+            // URI is .../product/{id}
+            $p = $this->Products->find($id);
+            return $p;
         }
         // } else {
         //     // URI is .../product/{id}
