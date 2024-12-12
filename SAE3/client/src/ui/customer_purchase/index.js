@@ -13,29 +13,40 @@ CustomerOrderCategoryView.renderChart = async function (data) {
 
   let products = [];
 
+  // Liste des couleurs pour les catégories
+  let colors = [
+    ["#544fc5", "#7a73e0"],
+    ["#00e272", "#4dffa6"],
+    ["#fe6a35", "#ff9a73"],
+    ["#d568fb", "#e29aff"],
+    ["#2caffe", "#80eaff"],
+  ];
   for (let category of categories) {
+    // On choisit une couleur pour chaque catégorie
     for (let product of data[category]) {
-      console.log(product);
+      let currentColor =
+        colors[categories.indexOf(category)][products.length % 2];
 
       let quantityFormated = Array(categories.length)
-      .fill(0)
-      .map((_, index) =>
-        index === categories.indexOf(category) ? parseFloat(product.total_quantity) : 0
-      );
-      console.log(quantityFormated);
+        .fill(0)
+        .map((_, index) =>
+          index === categories.indexOf(category)
+            ? parseFloat(product.total_quantity)
+            : 0
+        );
 
       let newProduct = {
         name: product.product_name,
-        data: quantityFormated
+        data: quantityFormated,
+        color: currentColor,
       };
       products.push(newProduct);
-      console.log(newProduct);
     }
   }
 
-
   await Highcharts.chart("client-order-category", {
     chart: {
+      polar: true,
       type: "column",
     },
     legend: {
@@ -62,6 +73,8 @@ CustomerOrderCategoryView.renderChart = async function (data) {
         dataLabels: {
           enabled: true,
         },
+        pointPadding: 0,
+        groupPadding: 0
       },
     },
     series: products,

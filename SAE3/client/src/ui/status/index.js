@@ -18,8 +18,7 @@ StatusView.render = async function() {
 
     v.innerHTML = cells;
     v.classList.add('cellule--split');
-
-    console.log(v.outerHTML);
+    
     return v.outerHTML;
 }
 

@@ -10,12 +10,10 @@ SmallestStocksView.renderChart = async function (data) {
     productNames.push(product.product_name);
     productStocks.push(parseFloat(product.stock) || 0);
   }
-  console.log(productNames);
-  console.log(productStocks);
   Highcharts.chart("smallest-stocks", {
 
     chart: {
-    //   polar: true,
+      // polar: true,
       type: "column"
     },
     title: {
@@ -39,6 +37,7 @@ SmallestStocksView.renderChart = async function (data) {
       {
         name: "Stock restant",
         data: productStocks,
+        color: "#00e272",
       },
     ],
   });
