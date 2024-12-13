@@ -9,4 +9,9 @@ OrderData.fetchMonthlyCountry = async function($month){
     return data;
 }
 
+OrderData.fetchCountryData = async function($month){
+    let data = await getRequest('order?duration=' + $month + '&stat=' + 'country_data');
+    return data;
+}
+
 export {OrderData};

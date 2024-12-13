@@ -1,3 +1,6 @@
+import Highcharts from 'highcharts';   
+
+
 const templateFile = await fetch("src/ui/top_products/template.html");
 const template = await templateFile.text();
 

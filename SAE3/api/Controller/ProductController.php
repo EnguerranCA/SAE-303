@@ -28,10 +28,6 @@ class ProductController extends Controller
             $p = $this->Products->returnTopProducts($amount, $duration);
             return $p;
         } else if ($stat == "sales") {
-            
-            
-
-            
             // URI is .../product/sales
             $p = $this->Products->returnMonthlySales($duration);
             return $p;

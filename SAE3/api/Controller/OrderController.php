@@ -19,6 +19,7 @@ class OrderController extends Controller {
         $id = $request->getId("id");
         $month = $request->getParam("month");
         $stat = $request->getParam("stat");
+        $duration = $request->getParam("duration");
         if ($stat == "status"){
             // URI is .../order?stat=status
             $p = $this->orders->countOrdersByStatus();
@@ -29,7 +30,11 @@ class OrderController extends Controller {
             $p = $this->orders->returnArticlesSentPerCountry($month);
             return $p;
         }
-        
+        if ($stat == "country_data") {
+            // URI is .../order?stat=country_data
+            $p = $this->orders->returnCountryData($duration);
+            return $p;
+        }
         else {
             // URI is .../order
             $p = $this->orders->findAll();

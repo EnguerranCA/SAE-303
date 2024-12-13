@@ -70,6 +70,29 @@ class OrderRepository extends EntityRepository {
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_OBJ);
     }
+
+    // Itération 11 : Retourner les données par pays
+    public function returnCountryData($duration) {
+        $requete = $this->cnx->prepare("
+            SELECT 
+                c.country, 
+                DATE_FORMAT(o.order_date, '%Y-%m') as month, 
+                COUNT(o.id) as orders_count
+            FROM 
+                Orders o
+            JOIN 
+                Customers c ON o.customer_id = c.id
+            WHERE 
+                o.order_date >= DATE_SUB(CURDATE(), INTERVAL :duration MONTH)
+            GROUP BY 
+                c.country, month
+            ORDER BY 
+                c.country, month
+        ");
+        $requete->bindParam(':duration', $duration);
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
     
 
 

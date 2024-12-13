@@ -1,3 +1,10 @@
+import Highcharts from 'highcharts';   
+import MapModule from 'highcharts/modules/map';
+import HighchartsMore from 'highcharts/highcharts-more';
+import DataModule from 'highcharts/modules/data';
+
+
+
 const templateFile = await fetch("src/ui/monthly_country/template.html");
 const template = await templateFile.text();
 
