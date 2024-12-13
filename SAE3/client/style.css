@@ -10,6 +10,10 @@ body {
   height: 100vh;
 }
 
+:root {
+  --highcharts-background-color: #EEF0F4;
+}
+
 .cellule {
   background: #eef0f4;
   border-radius: 2rem;
@@ -52,6 +56,12 @@ body {
   border: none;
 
   font-size: 1rem;
+}
+
+.cellule--month {
+  font-size: 1rem;
+
+  font-family: 'Roboto', sans-serif;
 }
 
 .cellule__content {

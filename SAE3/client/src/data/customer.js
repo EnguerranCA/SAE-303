@@ -13,4 +13,6 @@ CustomerData.fetchNames = async function(){
     let data = await getRequest('customer');
     return data;
 }
+
+
 export {CustomerData};

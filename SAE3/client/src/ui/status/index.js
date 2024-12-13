@@ -7,7 +7,7 @@ const template = await templateFile.text();
 let StatusView = {};
 
 StatusView.render = async function() {
-    let data = await getRequest("order/status");
+    let data = await getRequest("order?stat=status");
     let v = document.createElement("div");
     let cells = '';
 

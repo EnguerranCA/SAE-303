@@ -17,9 +17,22 @@ class OrderController extends Controller {
    
     protected function processGetRequest(HttpRequest $request) {
         $id = $request->getId("id");
-        if ($id == "status"){
-            // URI is .../order/status
+        $month = $request->getParam("month");
+        $stat = $request->getParam("stat");
+        if ($stat == "status"){
+            // URI is .../order?stat=status
             $p = $this->orders->countOrdersByStatus();
+            return $p;
+        }
+        if ($stat == "articles_country") {
+            // URI is .../order?stat=articles_country
+            $p = $this->orders->returnArticlesSentPerCountry($month);
+            return $p;
+        }
+        
+        else {
+            // URI is .../order
+            $p = $this->orders->findAll();
             return $p;
         }
     }

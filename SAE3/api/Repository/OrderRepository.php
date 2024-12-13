@@ -48,6 +48,31 @@ class OrderRepository extends EntityRepository {
         return $result;
     }
 
+    public function returnArticlesSentPerCountry($month) {
+        $requete = $this->cnx->prepare("
+                SELECT 
+                    c.country, 
+                    COUNT(oi.id) as articles_count
+                FROM 
+                    Orders o
+                JOIN 
+                    OrderItems oi ON o.id = oi.order_id
+                JOIN 
+                    Customers c ON o.customer_id = c.id
+                WHERE 
+                    DATE_FORMAT(o.order_date, '%Y-%m') = :month
+                GROUP BY 
+                    c.country
+                ORDER BY 
+                    c.country
+            ");
+        $requete->bindParam(':month', $month);
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_OBJ);
+    }
+    
+
+
 
     public function delete($id){
         // Not implemented ! TODO when needed !
